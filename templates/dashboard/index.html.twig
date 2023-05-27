@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block body %}
+
+    <div class="dashboard" >
+        <h1 class="welcome">Welcome on TKT dashboard!</h1>
+        <div class="dashboardTri">
+            <select class="secteur-select" id="sectorFilter" onchange="filterData()">
+                <option value="">Tous les secteurs</option>
+                <option value="electronic">Electronic</option>
+                <option value="services">Services</option>
+                <option value="energy">Energy</option>
+                <option value="luxury">Luxury</option>
+                <option value="retail">Retail</option>
+
+            </select>
+        </div>
+
+        <table class="apiTkt" id="apiTkt">
+            <thead>
+            <th><p>COMPANY</p></th>
+            <th><p>N° SIREN</p></th>
+            <th><p>CATEGORY</p></th>
+            </thead>
+            <tbody>
+            {% for data in datas %}
+                <tr>
+                    <td>{% if data['results'] is defined and data['results']|length > 0 %}
+                            <a href="{{ path('app_company_show', {'id': data['results'][0]}) }}">{{ data['name'] }}</a>
+                    {% else %}
+                        <a href="0">{{ data['name'] }}</a>
+                        {% endif %}</td><td>{{ data['siren'] }}</td>
+                    <td>{{ data['sector'] }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+            </tr>
+        </table>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        function filterData() {
+            var select = document.getElementById("sectorFilter");
+            var selectedSector = select.value.toLowerCase();
+
+            var table = document.getElementById("apiTkt");
+            var tbody = table.getElementsByTagName("tbody")[0];
+            var rows = tbody.getElementsByTagName("tr");
+
+            for (var i = 0; i < rows.length; i++) {
+                var sectorCell = rows[i].cells[2];
+                var sector = sectorCell.innerText.toLowerCase();
+
+                if (selectedSector === '' || sector === selectedSector) {
+                    rows[i].style.display = ""; // Afficher la ligne
+                } else {
+                    rows[i].style.display = "none"; // Masquer la ligne
+                }
+            }
+        }
+    </script>
+{% endblock %}

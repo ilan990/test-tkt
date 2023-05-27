@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Company{% endblock %}
+
+{% block body %}
+    <div class="stat">
+    <h1>Chiffres d'affaires</h1>
+    <canvas id="myChart1" width="50" height="10"></canvas>
+    <h1>EBITDA</h1>
+    <canvas id="myChart2" width="50" height="10"></canvas>
+    <h1>Loss</h1>
+    <canvas id="myChart3" width="50" height="10"></canvas>
+    <h1>Margin</h1>
+    <canvas id="myChart4" width="50" height="10"></canvas>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function() {
+       data = ["","",{{ datas[0]['caA1'] }},{{ datas[0]['caA2'] }},{{ datas[0]['ebitdaA1'] }},{{ datas[0]['ebitdaA2'] }},{{ datas[0]['lossA1'] }},{{ datas[0]['lossA2'] }},{{ datas[0]['marginA1'] }},{{ datas[0]['marginA2'] }}]
+            for (let i=1;i<5;i++){
+                const ctx = document.getElementById('myChart'+i).getContext('2d');
+
+                const myChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ["2016","2017"],
+                        datasets: [{
+                            label: 'Valeurs',
+                            data: [ data[i*2], data[i*2+1]],
+                            backgroundColor: 'blue',
+                        }]
+                    },
+                    options: {
+
+                        responsive: true,
+
+                    }
+                });
+            }
+        });
+
+    </script>
+{% endblock %}

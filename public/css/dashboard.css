@@ -1,0 +1,50 @@
+.company-select{
+    margin-top: 20px;
+}
+.dashboardTri{
+    display: flex;
+    align-items: center;
+}
+.dashboard{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+.secteur-select{
+    margin-top: 60px;
+}
+.welcome{
+    margin-left: 5vw;
+}
+select {
+    cursor: pointer;
+    display: inline-block;
+    font-size: 16px;
+    width: 60vw;
+    height:25px;
+}
+th p{
+    font-size: 12px;
+    font-family: "Times New Roman";
+    color: gray;
+}
+
+table.apiTkt {
+    width: 90%;
+    text-align: center;
+    border-collapse: separate;
+    border-spacing: 0 20px ;
+}
+
+table.apiTkt td{
+    border-top: 1px solid #AAAAAA;
+    border-bottom: 1px solid #AAAAAA;
+    padding: 10px 0px;
+}
+table.apiTkt tbody td {
+    font-size: 13px;
+}
+table.apiTkt tfoot td {
+    font-size: 14px;
+}
